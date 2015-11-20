@@ -70,8 +70,8 @@ public class URL {
 		else if (command.equals("stop")) {
 			System.out.println("Stopping");
 			mediaPlayerComponent.getMediaPlayer().stop();
-			frame.setVisible(false); //you can't see me!
-			frame.dispose(); //Destroy the JFrame object
+			frame.setVisible(false); 
+			frame.dispose(); 
 		}
 
 		else {
