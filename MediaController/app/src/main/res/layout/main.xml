@@ -5,75 +5,15 @@
     android:background="#ffffff"
     android:contextClickable="false">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Movies"
-        android:id="@+id/movies"
-        android:background="#000000"
-        android:textColor="#ffffff"
-        android:backgroundTint="#d33ce7"
-        android:layout_above="@+id/music"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Music"
-        android:id="@+id/music"
-        android:background="#000000"
-        android:textColor="#ffffff"
-        android:backgroundTint="#516bdd"
-        android:layout_above="@+id/others"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Others"
-        android:id="@+id/others"
-        android:textColor="#ffffff"
-        android:background="#000000"
-        android:backgroundTint="#b35050"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Media categories"
-        android:id="@+id/categories"
-        android:background="#ffffff"
-        android:backgroundTint="#ffffff"
-        android:textColor="#000000"
-        android:soundEffectsEnabled="false"
-        android:singleLine="false"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:autoText="false" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/webapp"
-        android:layout_marginTop="89dp"
-        android:layout_below="@+id/categories"
-        android:layout_alignParentLeft="true"
+        android:hint="52.8.205.41"
+        android:layout_above="@+id/renderer"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:hint="Enter IP of WebApp"
-        />
+        android:layout_marginBottom="73dp"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -84,6 +24,46 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="Enter IP of Renderer"
+        android:hint="192.168.0.xx"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Server IP Address"
+        android:id="@+id/ServerIPAddress"
+        android:layout_above="@+id/webapp"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Renderer IP Address"
+        android:id="@+id/textView"
+        android:layout_above="@+id/renderer"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categories"
+        android:id="@+id/categories"
+        android:layout_below="@+id/renderer"
+        android:layout_marginTop="71dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="#3c00ff"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Media Streamer"
+        android:id="@+id/MediaStreamer"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#000000" />
 </RelativeLayout>

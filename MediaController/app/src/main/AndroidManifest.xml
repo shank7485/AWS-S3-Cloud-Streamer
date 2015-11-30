@@ -13,6 +13,7 @@
         </activity>
         <activity android:name=".getMediaList"></activity>
         <activity android:name=".player"></activity>
+        <activity android:name=".category"></activity>
     </application>
 
 </manifest>

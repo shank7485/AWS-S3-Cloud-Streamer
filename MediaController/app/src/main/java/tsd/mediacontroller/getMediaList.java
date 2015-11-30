@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,7 +21,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 /**
  * Created by Shashank on 11/14/2015.
@@ -32,7 +43,7 @@ public class getMediaList extends Activity{
 
         final String value = getIntent().getStringExtra("value");
         String IPofWebApp = MainActivity.IPWebApp;
-        final String URL = "http://" + IPofWebApp +":8080/WebApp/rest/category/parameters?folder=" + value;
+        final String URL = "https://" + IPofWebApp +":8443/WebApp/rest/category/parameters?folder=" + value;
         ArrayList<String> list = new ArrayList<>();
 
         super.onCreate(savedInstanceState);
@@ -82,16 +93,56 @@ public class getMediaList extends Activity{
             String value = wrap.value;
             String URL = wrap.URL;
 
+            SSLSocketFactory sslSocketFactory = null;
+
+            try {
+                final TrustManager[] trustAllCerts = new TrustManager[]{
+                        new X509TrustManager() {
+                            @Override
+                            public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                            }
+
+                            @Override
+                            public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                            }
+
+                            @Override
+                            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                                return null;
+                            }
+                        }
+                };
+
+                final SSLContext sslContext = SSLContext.getInstance("SSL");
+                sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+                sslSocketFactory = sslContext.getSocketFactory();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            }
+
             OkHttpClient client = new OkHttpClient();
+
+            client.setSslSocketFactory(sslSocketFactory);
+
+            client.setHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+
             Request request = new Request.Builder().url(URL).build();
 
             try {
 
                 Response response = client.newCall(request).execute();
+                Log.d("TestHttp", "OkHttp-Selected-Protocol: " + response.header("OkHttp-Selected-Protocol"));
                 output = response.body().string();
                 JSONObject jObject = new JSONObject(output);
                 JSONArray jArray = jObject.getJSONArray("ListOfItemsinFolder");
-                for(int i = 0; i < jArray.length(); i++){
+                for (int i = 0; i < jArray.length(); i++) {
                     list.add(jArray.optString(i));
 
                 }
@@ -147,6 +198,16 @@ public class getMediaList extends Activity{
             });
 
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        backButtonHandler();
+    }
+
+    public void backButtonHandler(){
+        Intent BackToCategories = new Intent(getMediaList.this, category.class);
+        startActivity(BackToCategories);
     }
 
 }
