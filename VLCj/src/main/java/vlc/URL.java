@@ -91,9 +91,13 @@ public class URL {
 			@Override
 			public void run() {
 				new NativeDiscovery().discover();
+				
+				java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
 				frame = new JFrame("Media Streamer");
-				frame.setBounds(100, 100, 600, 400);
+				frame.setLocation(0,0);
+				frame.setSize(screenSize.width,screenSize.height);
+				//frame.setBounds(100, 100, 600, 400);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 				JPanel contentPane = new JPanel();
