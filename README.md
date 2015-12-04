@@ -6,4 +6,4 @@ A REST API to this media player is developed using Jersey REST framework so that
 The .war web files are run in Jetty server with HTTP2 confirguration to provide lesser latency. 
 
 ## Report
-* see [Report](https://github.com/shank7485/AWS-S3-Cloud-Streamer/raw/master/TSD%20Report.pdf) file
+* see [Report](https://github.com/shank7485/AWS-S3-Cloud-Streamer/blob/master/TSD%20Report.pdf) file
